@@ -1,3 +1,0 @@
-IGUI_ES = {
-    IGUI_ProxInv_Force_Selected = "Prox Inv Forzar selección: ",
-}

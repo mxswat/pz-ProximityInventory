@@ -1,5 +1,10 @@
 ProxInv = {}
 
+ProxInv.zombieContainerTypes = {
+  inventoryfemale = true,
+  inventorymale = true,
+}
+
 function ProxInv.print(...)
   if not isDebugEnabled() then
     return

@@ -7,6 +7,7 @@ function ISInventoryPage.GetProxInvContainer(playerNum)
   if ISInventoryPage.proxInvContainer[playerNum + 1] == nil then
     ISInventoryPage.proxInvContainer[playerNum + 1] = ItemContainer.new("proxinv", nil, nil, 10, 10)
     ISInventoryPage.proxInvContainer[playerNum + 1]:setExplored(true)
+    ISInventoryPage.proxInvContainer[playerNum+1]:setOnlyAcceptCategory("AbsolutelyNoItemAllowed")
   end
   return ISInventoryPage.proxInvContainer[playerNum + 1]
 end
@@ -16,7 +17,7 @@ function ISInventoryPage:addProxInvButton()
   proxInvContainer:removeItemsFromProcessItems()
   proxInvContainer:clear()
 
-  local title = getText("IGUI_ProxInventoryButton")
+  local title = getText("IGUI_ProxInv")
   self.proxInvButton = self:addContainerButton(proxInvContainer, proxInvIcon, title, title)
   self.proxInvButton.capacity = 0
   self.proxInvButton:setY(self:titleBarHeight() - 1)
@@ -29,14 +30,20 @@ function ISInventoryPage:isContainerLocked(container, player)
   return object and instanceof(object, "IsoThumpable") and object:isLockedToCharacter(playerObj)
 end
 
+function ISInventoryPage:canBeAddedToProxInv(container)
+  if SandboxVars.ProxInv.ZombieOnly then
+    return ProxInv.zombieContainerTypes[container:getType()]
+  end
+
+  return not self:isContainerLocked(container, self.player)
+end
+
 function ISInventoryPage:injectProxInvButton()
   for i = 1, #self.backpacks do
     local button = self.backpacks[i]
     local container = self.backpacks[i].inventory
-    local isLocked = self:isContainerLocked(container, self.player)
     if button ~= self.proxInvButton then
-      -- button:setY(button:getY() + button:getHeight()) -- Patch all the buttons Y position
-      if not isLocked  then
+      if self:canBeAddedToProxInv(container) then
         local items = container:getItems()
         self.proxInvButton.inventory:getItems():addAll(items)
       end
@@ -50,7 +57,7 @@ Events.OnRefreshInventoryWindowContainers.Add(function(self, state)
     return
   end
 
-  if state == "begin" then    
+  if state == "begin" then
     self:addProxInvButton()
   end
 
