@@ -1,5 +1,13 @@
 ProxInv = {}
 
+ProxInv.containerType = "proxinv"
+
+ProxInv.icons = {
+  enabled = getTexture("media/ui/ProximityInventory.png"),
+  disabled = getTexture("media/ui/ProximityInventory_Disabled.png"),
+  corpse = getTexture("media/ui/ProximityInventory_Corpse.png")
+}
+
 ProxInv.zombieContainerTypes = {
   inventoryfemale = true,
   inventorymale = true,

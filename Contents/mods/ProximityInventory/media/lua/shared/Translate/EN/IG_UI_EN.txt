@@ -5,4 +5,8 @@ IG_UI_EN = {
   IGUI_ProxInv_EnableHighlight = "Enable Containers Highlight",
   IGUI_ProxInv_Force_Selected_ON = "Prox Inv Force Selected: ON",
   IGUI_ProxInv_Force_Selected_OFF = "Prox Inv Force Selected: OFF",
+  IGUI_ProxInv_Toggle_ON = "Toggle ON",
+  IGUI_ProxInv_Toggle_OFF = "Toggle OFF",
+  IGUI_ProxInv_Toggle_Force_Selected_ON = "Toggle Force Selected ON",
+  IGUI_ProxInv_Toggle_Force_Selected_OFF = "Toggle Force Selected OFF",
 }

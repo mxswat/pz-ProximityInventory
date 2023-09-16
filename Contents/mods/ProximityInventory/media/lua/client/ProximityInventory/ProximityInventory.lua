@@ -1,6 +1,3 @@
-local proxInvIcon = getTexture("media/ui/ProximityInventory.png")
-local proxInvIconCorpse = getTexture("media/ui/ProximityInventory_Corpse.png")
-
 local function isZombieOnly()
   return SandboxVars.ProxInv.ZombieOnly
 end
@@ -10,12 +7,19 @@ function ISInventoryPage.GetProxInvContainer(playerNum)
     ISInventoryPage.proxInvContainer = {}
   end
   if ISInventoryPage.proxInvContainer[playerNum + 1] == nil then
-    ISInventoryPage.proxInvContainer[playerNum + 1] = ItemContainer.new("proxinv", nil, nil, 10, 10)
+    ISInventoryPage.proxInvContainer[playerNum + 1] = ItemContainer.new(ProxInv.containerType, nil, nil, 10, 10)
     ISInventoryPage.proxInvContainer[playerNum + 1]:setExplored(true)
     ISInventoryPage.proxInvContainer[playerNum + 1]:setOnlyAcceptCategory("AbsolutelyNoItemAllowed")
     ISInventoryPage.proxInvContainer[playerNum + 1]:setCapacity(0)
   end
   return ISInventoryPage.proxInvContainer[playerNum + 1]
+end
+
+function ISInventoryPage:getProxInvIcon()
+  if not ProxInv.Options.enableProxInv then
+    return ProxInv.icons.disabled
+  end
+  return isZombieOnly() and ProxInv.icons.corpse or ProxInv.icons.enabled
 end
 
 function ISInventoryPage:addProxInvButton()
@@ -24,8 +28,7 @@ function ISInventoryPage:addProxInvButton()
   proxInvContainer:clear()
 
   local title = isZombieOnly() and getText("IGUI_ProxInv_Corpses") or getText("IGUI_ProxInv")
-  local icon = isZombieOnly() and proxInvIconCorpse or proxInvIcon
-  self.proxInvButton = self:addContainerButton(proxInvContainer, icon, title, getText("Sandbox_ProxInv"))
+  self.proxInvButton = self:addContainerButton(proxInvContainer, self:getProxInvIcon(), title, getText("Sandbox_ProxInv"))
   self.proxInvButton:setY(self:titleBarHeight() - 1)
 
   if ProxInv.isForceSelected then
@@ -33,7 +36,8 @@ function ISInventoryPage:addProxInvButton()
     self.forceSelectedContainer = nil
     self.proxInvButton.textureOverride = getTexture("media/ui/Panel_Icon_Pin.png");
   end
-  if self.forceSelectedContainer and self.forceSelectedContainer:getType() ~= "proxinv" then
+
+  if self.forceSelectedContainer and self.forceSelectedContainer:getType() ~= ProxInv.containerType then
     -- game is forcing a different container
     return
   end
@@ -55,6 +59,9 @@ function ISInventoryPage:isContainerLocked(container, player)
 end
 
 function ISInventoryPage:canBeAddedToProxInv(container)
+  if not ProxInv.Options.enableProxInv then
+    return false
+  end
   if isZombieOnly() then
     return ProxInv.zombieContainerTypes[container:getType()]
   end
@@ -62,7 +69,7 @@ function ISInventoryPage:canBeAddedToProxInv(container)
   return not self:isContainerLocked(container, self.player)
 end
 
-function ISInventoryPage:injectProxInvButton()
+function ISInventoryPage:injectProxInvItems()
   for i = 1, #self.backpacks do
     local button = self.backpacks[i]
     local container = self.backpacks[i].inventory
@@ -77,7 +84,7 @@ function ISInventoryPage:injectProxInvButton()
 end
 
 Events.OnRefreshInventoryWindowContainers.Add(function(self, state)
-  if self.onCharacter or not ProxInv.Options.enableProxInv then
+  if self.onCharacter then
     -- Ignore character containers, as usual
     -- Or if disabled
     return
@@ -88,6 +95,6 @@ Events.OnRefreshInventoryWindowContainers.Add(function(self, state)
   end
   if state == "buttonsAdded" then
     self:addProxInvButton()
-    self:injectProxInvButton()
+    self:injectProxInvItems()
   end
 end)
