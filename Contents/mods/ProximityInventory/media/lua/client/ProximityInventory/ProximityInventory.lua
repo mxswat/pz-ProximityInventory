@@ -20,7 +20,7 @@ end
 
 function ISInventoryPage:addProxInvButton()
   local proxInvContainer = ISInventoryPage.GetProxInvContainer(self.player)
-  proxInvContainer:removeItemsFromProcessItems()
+  -- proxInvContainer:removeItemsFromProcessItems() -- NO, NEVER ENABLE THIS OR SHIT WONT COOK/FREEZE
   proxInvContainer:clear()
 
   local title = isZombieOnly() and getText("IGUI_ProxInv_Corpses") or getText("IGUI_ProxInv")
