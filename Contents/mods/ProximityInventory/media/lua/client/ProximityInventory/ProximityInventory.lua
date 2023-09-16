@@ -1,4 +1,9 @@
 local proxInvIcon = getTexture("media/ui/ProximityInventory.png")
+local proxInvIconCorpse = getTexture("media/ui/ProximityInventory_Corpse.png")
+
+local function isZombieOnly()
+  return SandboxVars.ProxInv.ZombieOnly
+end
 
 function ISInventoryPage.GetProxInvContainer(playerNum)
   if ISInventoryPage.proxInvContainer == nil then
@@ -18,8 +23,9 @@ function ISInventoryPage:addProxInvButton()
   proxInvContainer:removeItemsFromProcessItems()
   proxInvContainer:clear()
 
-  local title = getText("IGUI_ProxInv")
-  self.proxInvButton = self:addContainerButton(proxInvContainer, proxInvIcon, title, title)
+  local title = isZombieOnly() and getText("IGUI_ProxInv_Corpses") or getText("IGUI_ProxInv")
+  local icon = isZombieOnly() and proxInvIconCorpse or proxInvIcon
+  self.proxInvButton = self:addContainerButton(proxInvContainer, icon, title, getText("Sandbox_ProxInv"))
   self.proxInvButton:setY(self:titleBarHeight() - 1)
 
   if self.forceSelectedContainer and self.forceSelectedContainer:getType() ~= "proxinv" then
@@ -29,7 +35,7 @@ function ISInventoryPage:addProxInvButton()
   if not self.wasProxInvSelected then
     return
   end
-  -- This makes it so that when proxInv is selected, it stays selected util: 
+  -- This makes it so that when proxInv is selected, it stays selected util:
   -- - the game forces a different container
   -- - the user selects something else
   -- IMHO this is probably my best version of this mod to date
@@ -44,7 +50,7 @@ function ISInventoryPage:isContainerLocked(container, player)
 end
 
 function ISInventoryPage:canBeAddedToProxInv(container)
-  if SandboxVars.ProxInv.ZombieOnly then
+  if isZombieOnly() then
     return ProxInv.zombieContainerTypes[container:getType()]
   end
 

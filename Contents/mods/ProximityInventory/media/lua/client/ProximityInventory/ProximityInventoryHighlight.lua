@@ -1,4 +1,4 @@
-function ISInventoryPage:cleanHighlightProxInvContainers()
+function ISInventoryPage:removeHighlightProxInvContainers()
   self.highlightedContainers = self.highlightedContainers or {}
 
   for _, container in ipairs(self.highlightedContainers) do
@@ -34,7 +34,7 @@ end
 
 local old_ISInventoryPage_update = ISInventoryPage.update
 function ISInventoryPage:update()
-  self:cleanHighlightProxInvContainers();
+  self:removeHighlightProxInvContainers();
 
   if not ProxInv.Options.enableHighlight
       or self.isCollapsed
