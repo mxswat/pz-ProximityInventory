@@ -7,7 +7,8 @@ function ISInventoryPage.GetProxInvContainer(playerNum)
   if ISInventoryPage.proxInvContainer[playerNum + 1] == nil then
     ISInventoryPage.proxInvContainer[playerNum + 1] = ItemContainer.new("proxinv", nil, nil, 10, 10)
     ISInventoryPage.proxInvContainer[playerNum + 1]:setExplored(true)
-    ISInventoryPage.proxInvContainer[playerNum+1]:setOnlyAcceptCategory("AbsolutelyNoItemAllowed")
+    ISInventoryPage.proxInvContainer[playerNum + 1]:setOnlyAcceptCategory("AbsolutelyNoItemAllowed")
+    ISInventoryPage.proxInvContainer[playerNum + 1]:setCapacity(0)
   end
   return ISInventoryPage.proxInvContainer[playerNum + 1]
 end
@@ -19,9 +20,21 @@ function ISInventoryPage:addProxInvButton()
 
   local title = getText("IGUI_ProxInv")
   self.proxInvButton = self:addContainerButton(proxInvContainer, proxInvIcon, title, title)
-  self.proxInvButton.capacity = 0
   self.proxInvButton:setY(self:titleBarHeight() - 1)
-  return self.proxInvButton
+
+  if self.forceSelectedContainer and self.forceSelectedContainer:getType() ~= "proxinv" then
+    -- game is forcing a different container
+    return
+  end
+  if not self.wasProxInvSelected then
+    return
+  end
+  -- This makes it so that when proxInv is selected, it stays selected util: 
+  -- - the game forces a different container
+  -- - the user selects something else
+  -- IMHO this is probably my best version of this mod to date
+  self.forceSelectedContainer = self.proxInvButton.inventory
+  self.forceSelectedContainerTime = getTimestampMs() + 200
 end
 
 function ISInventoryPage:isContainerLocked(container, player)
@@ -47,6 +60,7 @@ function ISInventoryPage:injectProxInvButton()
         local items = container:getItems()
         self.proxInvButton.inventory:getItems():addAll(items)
       end
+      button:setY(button:getY() + button:getHeight())
     end
   end
 end
@@ -58,10 +72,10 @@ Events.OnRefreshInventoryWindowContainers.Add(function(self, state)
   end
 
   if state == "begin" then
-    self:addProxInvButton()
+    self.wasProxInvSelected = self.inventoryPane.lastinventory == (self.proxInvButton and self.proxInvButton.inventory)
   end
-
   if state == "buttonsAdded" then
+    self:addProxInvButton()
     self:injectProxInvButton()
   end
 end)
