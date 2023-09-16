@@ -28,6 +28,11 @@ function ISInventoryPage:addProxInvButton()
   self.proxInvButton = self:addContainerButton(proxInvContainer, icon, title, getText("Sandbox_ProxInv"))
   self.proxInvButton:setY(self:titleBarHeight() - 1)
 
+  if ProxInv.isForceSelected then
+    self.wasProxInvSelected = true
+    self.forceSelectedContainer = nil
+    self.proxInvButton.textureOverride = getTexture("media/ui/Panel_Icon_Pin.png");
+  end
   if self.forceSelectedContainer and self.forceSelectedContainer:getType() ~= "proxinv" then
     -- game is forcing a different container
     return

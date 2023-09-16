@@ -21,12 +21,18 @@ description=Using the [b]sandbox options[/b]
 description=- [b]Zombie Only Mode[/b]: Enable this if you want the Proximity Inventory to work only on zombies
 description=
 description=Using the [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2169435993] Mod Options [/url]
+description=Found in: Menu -> Options -> Mods -> Proximity Inventory
 description=- [b]Highlight Toggle[/b]: Enable or the disable the prox inv highlight
-description=- [b]Enable Proximity Inventory[/b]: Enable or disable prox inv only for your client, other clients are unaffected
+description=- [b]Enable Proximity Inventory[/b]: Enable or disable prox inv only for your client. Other clients are unaffected
+description=
+description=Using the [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2169435993] Mod Options Key Binding [/url]
+description=Found in: Menu -> Options -> Key Bindings -> Proximity Inventory
+description=- [b]Force Selected Key[/b]: Forces the Prox Inventory to always be selected. You can still drag and drop items on the other container's icons when Prox Inv Is Force Selected. 
 description=
 description=[h1] Features v2.0 [/h1]
-description=- The mod will try to keep the Prox Inventory selected as long as the user manually selects it, removing the need for a custom keybinding
+description=- The mod will try to keep the Prox Inventory selected as long as the user manually selects it. Unless you are moving an item outside of the Prox Inv, in that case, it will be de-selected. Use the "Force Selected Key" to avoid this.
 description=- [b]Zombie Only Mode[/b] has it's own custom icon
+description=- [b]Force Selected Icon[/b] Added a pin icon to show on the UI that the Prox Inv is force selected.
 description=
 description=[h1] Compatibility [/h1]
 description=- Works on 41.73 and above

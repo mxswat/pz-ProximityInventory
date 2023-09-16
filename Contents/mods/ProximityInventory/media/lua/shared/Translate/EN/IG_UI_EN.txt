@@ -2,5 +2,7 @@ IG_UI_EN = {
   IGUI_ProxInv = "Prox Inventory",
   IGUI_ProxInv_Corpses = "Prox Inv Corpses",
   IGUI_ProxInv_Enable = "Enable Proximity Inventory",
-  IGUI_ProxInv_EnableHighlight = "Enable containers Highlight",
+  IGUI_ProxInv_EnableHighlight = "Enable Containers Highlight",
+  IGUI_ProxInv_Force_Selected_ON = "Prox Inv Force Selected: ON",
+  IGUI_ProxInv_Force_Selected_OFF = "Prox Inv Force Selected: OFF",
 }

@@ -22,7 +22,11 @@ ProxInv.Options = {
   enableHighlight = true,
 }
 
-if ModOptions and ModOptions.getInstance then
+if not ModOptions then
+  return
+end
+
+if ModOptions.getInstance then
   local settings = ModOptions:getInstance(ProxInv.Options, "ProxInv", "Proximity Inventory")
 
   settings.names = {
@@ -30,3 +34,31 @@ if ModOptions and ModOptions.getInstance then
     enableHighlight = "IGUI_ProxInv_EnableHighlight",
   }
 end
+
+ProxInv.isForceSelected = false
+
+local KEY_ForceSelected = {
+  name = "ProxInv_Force_Selected",
+  key = Keyboard.KEY_NUMPAD0,
+}
+
+if ModOptions.AddKeyBinding then
+  ModOptions:AddKeyBinding("[ProximityInventory]", KEY_ForceSelected)
+end
+
+local function OnKeyPressed(keynum)
+  local player = getSpecificPlayer(0)
+  if not player then
+    return
+  end
+
+  if keynum == KEY_ForceSelected.key then
+    ProxInv.isForceSelected = not ProxInv.isForceSelected
+    local text = getText("IGUI_ProxInv_Force_Selected_" .. (ProxInv.isForceSelected and 'ON' or 'OFF'))
+    HaloTextHelper.addText(player, text, HaloTextHelper.getColorWhite())
+    ISInventoryPage.dirtyUI()
+    return
+  end
+end
+
+Events.OnKeyPressed.Add(OnKeyPressed)
