@@ -18,6 +18,7 @@ function ProxInv.print(...)
 end
 
 ProxInv.Options = {
+  enableProxInv = true,
   enableHighlight = true,
 }
 
@@ -25,6 +26,7 @@ if ModOptions and ModOptions.getInstance then
   local settings = ModOptions:getInstance(ProxInv.Options, "ProxInv", "Proximity Inventory")
 
   settings.names = {
+    enableProxInv = "IGUI_ProxInv_Enable",
     enableHighlight = "IGUI_ProxInv_EnableHighlight",
   }
 end

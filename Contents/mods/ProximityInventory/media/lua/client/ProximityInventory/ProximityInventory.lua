@@ -72,8 +72,9 @@ function ISInventoryPage:injectProxInvButton()
 end
 
 Events.OnRefreshInventoryWindowContainers.Add(function(self, state)
-  if self.onCharacter then
+  if self.onCharacter or not ProxInv.Options.enableProxInv then
     -- Ignore character containers, as usual
+    -- Or if disabled
     return
   end
 
