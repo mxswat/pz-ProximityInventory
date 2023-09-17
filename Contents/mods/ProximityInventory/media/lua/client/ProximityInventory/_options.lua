@@ -28,6 +28,7 @@ end
 ProxInv.Options = {
   enableProxInv = true,
   enableHighlight = true,
+  alwaysAsFirst = true,
 }
 
 if not ModOptions then
@@ -40,6 +41,7 @@ if ModOptions.getInstance then
   settings.names = {
     enableProxInv = "IGUI_ProxInv_Enable",
     enableHighlight = "IGUI_ProxInv_EnableHighlight",
+    alwaysAsFirst = "IGUI_ProxInv_AlwaysAsFirst",
   }
 end
 

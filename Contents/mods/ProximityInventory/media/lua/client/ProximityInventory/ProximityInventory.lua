@@ -23,13 +23,25 @@ function ISInventoryPage:getProxInvIcon()
 end
 
 function ISInventoryPage:addProxInvButton()
+  if self.proxInvButton then 
+    -- This avoid the generation of multiple buttons when enableProxInv is false
+    self:removeChild(self.proxInvButton)
+  end
+
   local proxInvContainer = ISInventoryPage.GetProxInvContainer(self.player)
   -- proxInvContainer:removeItemsFromProcessItems() -- NO, NEVER ENABLE THIS OR SHIT WONT COOK/FREEZE
   proxInvContainer:clear()
 
   local title = isZombieOnly() and getText("IGUI_ProxInv_Corpses") or getText("IGUI_ProxInv")
   self.proxInvButton = self:addContainerButton(proxInvContainer, self:getProxInvIcon(), title, getText("Sandbox_ProxInv"))
-  self.proxInvButton:setY(self:titleBarHeight() - 1)
+
+  if not ProxInv.Options.enableProxInv then
+    table.remove(self.backpacks, #self.backpacks)
+  end
+
+  if ProxInv.Options.alwaysAsFirst then
+    self.proxInvButton:setY(self:titleBarHeight() - 1)
+  end
 
   if ProxInv.isForceSelected then
     self.wasProxInvSelected = true
@@ -78,7 +90,9 @@ function ISInventoryPage:injectProxInvItems()
         local items = container:getItems()
         self.proxInvButton.inventory:getItems():addAll(items)
       end
-      button:setY(button:getY() + button:getHeight())
+      if ProxInv.Options.alwaysAsFirst then
+        button:setY(button:getY() + button:getHeight())
+      end
     end
   end
 end
