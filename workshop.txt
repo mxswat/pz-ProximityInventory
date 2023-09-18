@@ -20,6 +20,8 @@ description=[h1] Options [/h1]
 description=Using the [b]sandbox options[/b]
 description=- [b]Zombie Only Mode[/b]: Enable this if you want the Proximity Inventory to work only on zombies
 description=
+description=You need to download the mod: [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2169435993] Mod Options [/url] if you want to use the mod options!
+description=
 description=Using the [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2169435993] Mod Options [/url]
 description=Found in: Menu -> Options -> Mods -> Proximity Inventory
 description=- [b]Highlight Toggle[/b]: Enable or the disable the prox inv highlight

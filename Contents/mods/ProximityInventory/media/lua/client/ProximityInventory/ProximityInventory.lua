@@ -23,7 +23,7 @@ function ISInventoryPage:getProxInvIcon()
 end
 
 function ISInventoryPage:addProxInvButton()
-  if self.proxInvButton then 
+  if self.proxInvButton then
     -- This avoid the generation of multiple buttons when enableProxInv is false
     self:removeChild(self.proxInvButton)
   end
@@ -36,11 +36,8 @@ function ISInventoryPage:addProxInvButton()
   self.proxInvButton = self:addContainerButton(proxInvContainer, self:getProxInvIcon(), title, getText("Sandbox_ProxInv"))
 
   if not ProxInv.Options.enableProxInv then
-    table.remove(self.backpacks, #self.backpacks)
-  end
-
-  if ProxInv.Options.alwaysAsFirst then
-    self.proxInvButton:setY(self:titleBarHeight() - 1)
+    self.proxInvButton.onclick = nil
+    self.proxInvButton.onmousedown = nil
   end
 
   if ProxInv.isForceSelected then
@@ -90,9 +87,6 @@ function ISInventoryPage:injectProxInvItems()
         local items = container:getItems()
         self.proxInvButton.inventory:getItems():addAll(items)
       end
-      if ProxInv.Options.alwaysAsFirst then
-        button:setY(button:getY() + button:getHeight())
-      end
     end
   end
 end
@@ -106,9 +100,39 @@ Events.OnRefreshInventoryWindowContainers.Add(function(self, state)
 
   if state == "begin" then
     self.wasProxInvSelected = self.inventoryPane.lastinventory == (self.proxInvButton and self.proxInvButton.inventory)
+    if ProxInv.Options.alwaysAsFirst then
+      self:addProxInvButton()
+    end
   end
   if state == "buttonsAdded" then
-    self:addProxInvButton()
     self:injectProxInvItems()
+    if not ProxInv.Options.alwaysAsFirst then
+      self:addProxInvButton()
+    end
   end
 end)
+
+
+-- Handles the disabled state, so that on scroll, it won't select the prox inv when disabled
+
+local old_ISInventoryPage_prevUnlockedContainer = ISInventoryPage.prevUnlockedContainer
+function ISInventoryPage:prevUnlockedContainer(index, wrap)
+  local result = old_ISInventoryPage_prevUnlockedContainer(self, index, wrap)
+
+  if not ProxInv.Options.enableProxInv and self.backpacks[result] and self.backpacks[result].ID == self.proxInvButton.ID then
+    return old_ISInventoryPage_prevUnlockedContainer(self, index - 1, wrap)
+  end
+
+  return result
+end
+
+local old_ISInventoryPage_nextUnlockedContainer = ISInventoryPage.nextUnlockedContainer
+function ISInventoryPage:nextUnlockedContainer(index, wrap)
+  local result = old_ISInventoryPage_nextUnlockedContainer(self, index, wrap)
+
+  if not ProxInv.Options.enableProxInv and self.backpacks[result] and self.backpacks[result].ID == self.proxInvButton.ID then
+    return old_ISInventoryPage_nextUnlockedContainer(self, index + 1, wrap)
+  end
+
+  return result
+end
