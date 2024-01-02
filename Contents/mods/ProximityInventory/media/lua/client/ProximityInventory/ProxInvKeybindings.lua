@@ -1,3 +1,4 @@
+local ProximityInventory = require "ProximityInventory/ProximityInventory"
 local ProxInvKeybindings = {};
 
 ProxInvKeybindings.ToggleForceSelectedKeybind = {
