@@ -1,4 +1,4 @@
-ProxInv = {}
+local ProxInv = {}
 ProxInv.isToggled = true
 ProxInv.isHighlightEnable = true
 ProxInv.isForceSelected = false

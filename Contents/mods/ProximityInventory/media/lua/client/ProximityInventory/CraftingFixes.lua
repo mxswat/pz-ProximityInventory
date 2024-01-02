@@ -1,0 +1,5 @@
+-- local function func()
+--   FunctionYouWantToCall()
+--   Events.OnTick.Remove(func)
+-- end
+-- Events.OnTick.Add(func)
