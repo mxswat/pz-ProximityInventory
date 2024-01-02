@@ -12,7 +12,11 @@ table.insert(keyBinding, ProxInvKeybindings.ToggleForceSelectedKeybind);
 
 function ProxInvKeybindings.OnKeyPressed(key)
   if key == getCore():getKey(ProxInvKeybindings.ToggleForceSelectedKeybind.value) then
-    print("ToggleForceSelected called!")
+    local player = getSpecificPlayer(0)
+    ProximityInventory.isForceSelected = not ProximityInventory.isForceSelected
+    ProximityInventory.refreshUI()
+    local text = getText("IGUI_ProxInv_Force_Selected") .. (ProximityInventory.isForceSelected and "ON" or "OFF")
+		HaloTextHelper.addText(player, text, HaloTextHelper.getColorWhite())
   end
 end
 
