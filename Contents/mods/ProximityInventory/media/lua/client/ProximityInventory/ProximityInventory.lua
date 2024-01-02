@@ -47,7 +47,7 @@ end
 
 ---@type table<number, number>
 ProximityInventory.lastRefreshTime = {}
-ProximityInventory.debounceDelay = 150
+ProximityInventory.debounceDelay = 250
 function ProximityInventory.OnButtonsAddedDebounced(invPage)
   -- Initialize the lastRefreshTime for the player
   ProximityInventory.lastRefreshTime[invPage.player] = ProximityInventory.lastRefreshTime[invPage.player] or 0
@@ -56,7 +56,9 @@ function ProximityInventory.OnButtonsAddedDebounced(invPage)
   local lastRefreshTime = ProximityInventory.lastRefreshTime[invPage.player]
 
   -- Debounce to help with performance
-  if currentTime - lastRefreshTime < ProximityInventory.debounceDelay then return end
+  if currentTime - lastRefreshTime < ProximityInventory.debounceDelay then 
+    return ProximityInventory.print("Debounced")
+  end
   ProximityInventory.lastRefreshTime[invPage.player] = currentTime
 
   ProximityInventory.OnButtonsAdded(invPage)
@@ -80,7 +82,7 @@ function ProximityInventory.OnButtonsAdded(invPage)
       playerObj = playerObj,
       proxInvContainer = proxInvContainer,
       invPage = invPage,
-      index = i
+      isLast = i == #invPage.backpacks
     }
 
     table.insert(argumentsTable, arguments)
@@ -95,6 +97,7 @@ function ProximityInventory.AddContainerItemsToProxInv(arguments)
   local proxInvContainer = arguments.proxInvContainer
   local container = arguments.container
   local invPage = arguments.invPage
+  local isLast = arguments.isLast
 
   if container == proxInvContainer then return end
   if not ProximityInventory.canBeAdded(container, playerObj) then return end
@@ -104,7 +107,8 @@ function ProximityInventory.AddContainerItemsToProxInv(arguments)
   ---@diagnostic disable-next-line: param-type-mismatch
   proxInvContainer:getItems():addAll(container:getItems())
 
-  if invPage.inventoryPane ~= nil then
+  if invPage.inventoryPane and isLast then
+    ProximityInventory.print("Refreshing InventoryPane")
 		invPage.inventoryPane:refreshContainer()
 	end
 end
