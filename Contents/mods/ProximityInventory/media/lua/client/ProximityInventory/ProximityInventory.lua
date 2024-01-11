@@ -47,26 +47,26 @@ function ProximityInventory.canBeAdded(container, playerObj)
   return true
 end
 
----@type table<number, number>
-ProximityInventory.lastRefreshTime = {}
-ProximityInventory.debounceDelay = 250
-function ProximityInventory.OnButtonsAddedDebounced(invPage)
-  if not ProximityInventory.isToggled then return end
+-- ---@type table<number, number>
+-- ProximityInventory.lastRefreshTime = {}
+-- ProximityInventory.debounceDelay = 250
+-- function ProximityInventory.OnButtonsAddedDebounced(invPage)
+--   if not ProximityInventory.isToggled then return end
 
-  -- Initialize the lastRefreshTime for the player
-  ProximityInventory.lastRefreshTime[invPage.player] = ProximityInventory.lastRefreshTime[invPage.player] or 0
+--   -- Initialize the lastRefreshTime for the player
+--   ProximityInventory.lastRefreshTime[invPage.player] = ProximityInventory.lastRefreshTime[invPage.player] or 0
 
-  local currentTime = math.floor(os.time() * 1000)
-  local lastRefreshTime = ProximityInventory.lastRefreshTime[invPage.player]
+--   local currentTime = math.floor(os.time() * 1000)
+--   local lastRefreshTime = ProximityInventory.lastRefreshTime[invPage.player]
 
-  -- Debounce to help with performance
-  if currentTime - lastRefreshTime < ProximityInventory.debounceDelay then
-    return ProximityInventory.print("Debounced")
-  end
-  ProximityInventory.lastRefreshTime[invPage.player] = currentTime
+--   -- Debounce to help with performance
+--   if currentTime - lastRefreshTime < ProximityInventory.debounceDelay then
+--     return ProximityInventory.print("Debounced")
+--   end
+--   ProximityInventory.lastRefreshTime[invPage.player] = currentTime
 
-  ProximityInventory.OnButtonsAdded(invPage)
-end
+--   ProximityInventory.OnButtonsAdded(invPage)
+-- end
 
 ---@param invPage ISInventoryPage
 function ProximityInventory.OnButtonsAdded(invPage)
@@ -163,7 +163,7 @@ function ProximityInventory.OnRefreshInventoryWindowContainers(invPage, state)
   if state == "begin" then
     return ProximityInventory.OnBegin(invPage)
   elseif state == "buttonsAdded" then
-    return ProximityInventory.OnButtonsAddedDebounced(invPage)
+    return ProximityInventory.OnButtonsAdded(invPage)
   end
 end
 
