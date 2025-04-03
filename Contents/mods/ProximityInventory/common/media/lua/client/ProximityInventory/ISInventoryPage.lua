@@ -13,9 +13,9 @@ function ISInventoryPage:update()
   for i=#self.coloredProxInventories, 1, -1 do
     local parent = self.coloredProxInventories[i]:getParent()
     if parent then
-      parent:setHighlighted(false)
-      parent:setOutlineHighlight(false);
-      parent:setOutlineHlAttached(false);
+      parent:setHighlighted(self.player, false)
+      parent:setOutlineHighlight(self.player, false);
+      parent:setOutlineHlAttached(self.player, false);
     end
     self.coloredProxInventories[i]=nil
   end
@@ -26,8 +26,8 @@ function ISInventoryPage:update()
     local container = self.backpacks[i].inventory
     local parent = container:getParent()
     if parent and (instanceof(parent, "IsoObject") or instanceof(parent, "IsoDeadBody")) then
-      parent:setHighlighted(true, false)
-      parent:setHighlightColor(getCore():getObjectHighlitedColor())
+      parent:setHighlighted(self.player, true, false)
+      parent:setHighlightColor(self.player, getCore():getObjectHighlitedColor())
       self.coloredProxInventories[#self.coloredProxInventories+1] = container
     end
   end
