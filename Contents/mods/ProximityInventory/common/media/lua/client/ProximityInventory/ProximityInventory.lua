@@ -55,10 +55,8 @@ function ProximityInventory.CanBeAdded(container, playerObj)
   return true
 end
 
----@param invSelf ISInventoryPage
-function ProximityInventory.GetItemContainer(invSelf)
-  local playerNum = invSelf.player --[[@as number]]
-
+---@param playerNum number
+function ProximityInventory.GetItemContainer(playerNum)
   if ProximityInventory.itemContainer[playerNum] then
     return ProximityInventory.itemContainer[playerNum]
   end
@@ -74,7 +72,7 @@ end
 ---@param invSelf ISInventoryPage
 ---@return ISButton
 function ProximityInventory.AddProximityInventoryButton(invSelf)
-  local itemContainer = ProximityInventory.GetItemContainer(invSelf)
+  local itemContainer = ProximityInventory.GetItemContainer(invSelf.player)
   itemContainer:clear() -- We want to reset the proxinv between refreshes
 
   local title = getText("IGUI_ProxInv_InventoryName")
@@ -116,7 +114,7 @@ function ProximityInventory.OnButtonsAdded(invSelf)
 
   -- Handle force selected
   if ProximityInventory.isForceSelected[playerNum] then
-    invSelf:setForceSelectedContainer(ProximityInventory.GetItemContainer(invSelf))
+    invSelf:setForceSelectedContainer(ProximityInventory.GetItemContainer(playerNum))
   end
 
   -- Add All backpacks content except proxInv (TODO: Ensure the 'except proxInv' part)
