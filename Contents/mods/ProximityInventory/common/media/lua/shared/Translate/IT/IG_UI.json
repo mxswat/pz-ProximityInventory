@@ -1,0 +1,13 @@
+{
+    "IGUI_ProxInv_Text_ForceSelectOn": "Forza selezione Inv. prossimità: ON",
+    "IGUI_ProxInv_Text_ForceSelectOff": "Forza selezione Inv. prossimità: OFF",
+    "IGUI_ProxInv_InventoryName": "Inv. prossimità",
+    "IGUI_ProxInv_Tooltip_ToggleOn": "Tasto DX mouse per le opzioni",
+    "IGUI_ProxInv_Tooltip_ToggleOff": "Disabilitato - Tasto DX mouse per le opzioni",
+    "IGUI_ProxInv_Context_ToggleOn": "Disattivato",
+    "IGUI_ProxInv_Context_ToggleOff": "Attivato",
+    "IGUI_ProxInv_Context_ForceSelectOn": "Disattiva Forza selezione",
+    "IGUI_ProxInv_Context_ForceSelectOff": "Attiva Forza selezione",
+    "IGUI_ProxInv_Context_HighlightOn": "Disattiva Evidenziazione",
+    "IGUI_ProxInv_Context_HighlightOff": "Attiva Evidenziazione"
+}

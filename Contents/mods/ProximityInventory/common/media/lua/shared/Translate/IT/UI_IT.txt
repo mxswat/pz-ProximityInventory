@@ -1,0 +1,7 @@
+UI_IT = {
+	UI_optionscreen_binding_ProximityInventory = "Inventario di prossimità",
+    UI_optionscreen_binding_ProximityInventory_toggleEnabled = "Attiva o disattiva 'Inventario di prossimità'",
+    UI_optionscreen_binding_ProximityInventory_ToggleForceSelected = "Attiva o disattiva 'Forza selezione'",
+    UI_optionscreen_binding_ProximityInventory_isHighlightEnableOption = "Evidenzia i contenitori usati dall'inventario di prossimità",
+    UI_optionscreen_binding_ProximityInventory_isEnabled = "Abilita inventario di prossimità",
+}

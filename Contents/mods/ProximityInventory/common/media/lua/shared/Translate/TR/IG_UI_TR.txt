@@ -1,0 +1,13 @@
+IGUI_TR = {
+    IGUI_ProxInv_Text_ForceSelectOn = "Stok yakını, zorunlu tahsis: AÇIK.",
+    IGUI_ProxInv_Text_ForceSelectOff = "Yakın envanter, zorunlu tahsis: KAPALI.",
+    IGUI_ProxInv_InventoryName = "Yakınlık envanteri",
+    IGUI_ProxInv_Tooltip_ToggleOn = "Etkinleştirildi – Ayarlar için sağ tıklayın",
+    IGUI_ProxInv_Tooltip_ToggleOff = "Devre Dışı – Ayarlar için sağ tıklayın",
+    IGUI_ProxInv_Context_ToggleOn = "Kapatmak",
+    IGUI_ProxInv_Context_ToggleOff = "Aktif Et",
+    IGUI_ProxInv_Context_ForceSelectOn = "Zorunlu seçimi devre dışı bırak",
+    IGUI_ProxInv_Context_ForceSelectOff = "Zorunlu seçimi etkinleştir",
+    IGUI_ProxInv_Context_HighlightOn = "Arka ışığı kapat",
+    IGUI_ProxInv_Context_HighlightOff = "Arka ışıği aç",
+}

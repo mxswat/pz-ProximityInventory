@@ -1,0 +1,13 @@
+IGUI_UA = {
+    IGUI_ProxInv_Text_ForceSelectOn = "Ближній інвентар, примусове виділення: УВІМК.",
+    IGUI_ProxInv_Text_ForceSelectOff = "Ближній інвентар, примусове виділення: ВИМК.",
+    IGUI_ProxInv_InventoryName = "Ближній інв.",
+    IGUI_ProxInv_Tooltip_ToggleOn = "Клацніть правою кнопкою миші для налаштувань",
+    IGUI_ProxInv_Tooltip_ToggleOff = "Вимкнено - клацніть правою кнопкою миші для налаштувань",
+    IGUI_ProxInv_Context_ToggleOn = "Вимкнути",
+    IGUI_ProxInv_Context_ToggleOff = "Увімкнути",
+    IGUI_ProxInv_Context_ForceSelectOn = "Вимкнути примусове виділення",
+    IGUI_ProxInv_Context_ForceSelectOff = "Увімкнути примусове виділення",
+    IGUI_ProxInv_Context_HighlightOn = "Вимкнути підсвічування",
+    IGUI_ProxInv_Context_HighlightOff = "Увімкнути підсвічування",
+}

@@ -1,0 +1,7 @@
+UI_TR = {
+	UI_optionscreen_binding_ProximityInventory = "Yakın envanteri",
+    UI_optionscreen_binding_ProximityInventory_toggleEnabled = "Yakın Envanterini etkinleştirin veya devre dışı bırakın",
+    UI_optionscreen_binding_ProximityInventory_ToggleForceSelected = "Etkinleştir veya devre dışı bırak « Seçimi zorla »",
+    UI_optionscreen_binding_ProximityInventory_isHighlightEnableOption = "Yakın envanteri tarafından kullanılan konteynerleri vurgulayın",
+    UI_optionscreen_binding_ProximityInventory_isEnabled = "Yakın envanteri etkin",
+}

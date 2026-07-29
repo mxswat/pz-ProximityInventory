@@ -1,0 +1,5 @@
+Sandbox_IT = {
+	Sandbox_ProximityInventory = "Inventario di prossimità",
+    Sandbox_ZombieOnly = "Opzione solo sugli zombi",
+    Sandbox_ZombieOnly_tooltip = "Abilita questa opzione se vuoi che l'inventario di prossimità funzioni solo sugli zombi",
+}

@@ -1,0 +1,5 @@
+Sandbox_UA = {
+	Sandbox_ProximityInventory = "Proximity Inventory",
+    Sandbox_ZombieOnly = "Режим тільки для зомбі",
+    Sandbox_ZombieOnly_tooltip = "Увімкніть це, якщо хочете, щоб ближній інвентар працював тільки на зомбі",
+}
