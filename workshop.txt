@@ -1,6 +1,7 @@
 version=1
 id=2847184718
-title=Proximity Inventory [B41/42]
+title=Proximity Inventory B42.20+ | We are so back
+
 description=[h1] Now Updated to work with B42! Check out the new keybinds in the options! [/h1]
 description=[h1] Proximity Inventory [/h1]
 description=
